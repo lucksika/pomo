@@ -6,6 +6,19 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontFamily: {
+      sans: [
+        "Open Sans, sans-serif",
+      ],
+    },
+    colors: {
+      'pomored': '#A00607',
+      'pomodarkred': "#6A0405",
+      'pomotext': '#3C2E0E',
+      'pomocaption': "#BEA171",
+      'pomobg': "#E9D5C0",
+      "pomodisable": "#AEA6A6"
+    },
     extend: {},
   },
   plugins: [],
