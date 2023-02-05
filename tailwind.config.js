@@ -6,11 +6,16 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    fontFamily: {
-      sans: [
-        "Open Sans, sans-serif",
-      ],
+    extend: {
+      fontFamily: {
+        inter: ['Inter'],
+      }
     },
+    // fontFamily: {
+    //   sans: [
+    //     "Open Sans, sans-serif",
+    //   ],
+    // },
     colors: {
       'pomored': '#A00607',
       'pomodarkred': "#6A0405",
