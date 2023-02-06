@@ -11,16 +11,10 @@ import { RxDotFilled } from 'react-icons/rx'
 
 const StartPomo: NextPage = () => {
   const initialPomo = {
-    focusTime: 5,
-    shortbreakTime: 3,
-    longbreakTime: 4
+    focusTime: 25 * 60,
+    shortbreakTime: 5 * 60,
+    longbreakTime: 15 * 60
   }
-
-  const [
-    setPomo, startCounter, pauseCounter, resetCounter, 
-    isCounting, sessionClosed, timeLeft, numShortBreak,
-    cycle ] = usePomodoro(initialPomo)
-  const [disableButton, setDisbleButton] = useState(false)
 
   const formatTime = (timeLeft: number) : string => {
     let formatted = "00:00"
@@ -29,8 +23,24 @@ const StartPomo: NextPage = () => {
 
     formatted = String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0')
     return formatted
-}
+  }
 
+  const [
+    setPomo, startCounter, pauseCounter, resetCounter, 
+    isCounting, sessionClosed, timeLeft, numShortBreak,
+    cycle ] = usePomodoro(initialPomo)
+  const [disableButton, setDisbleButton] = useState(false)
+  const [focusTimeString, setFocusTimeString] = useState(formatTime(initialPomo.focusTime))
+  const [shortbreakTimeString, setShortbreakTimeString] = useState(formatTime(initialPomo.shortbreakTime))
+  const [longbreakTimeString, setLongbreakTimeString] = useState(formatTime(initialPomo.longbreakTime))
+
+  
+  const stringToSeconds = (timeString: string) => {
+    let [minutes, seconds] = timeString.split(":")
+
+    return (parseInt(minutes) * 60) + parseInt(seconds)
+  }
+    
   const isValidTimeFormat = (time: string) => {
     var timeFormat = /^([0-5][0-9]):([0-5][0-9])$/;
     return timeFormat.test(time);
@@ -38,7 +48,9 @@ const StartPomo: NextPage = () => {
 
   const onTimerValChange = (event: any) => {
     let val = event.target.value
-    initialPomo.focusTime = val
+    setFocusTimeString(val)
+    initialPomo.focusTime = stringToSeconds(focusTimeString)
+
     if (isValidTimeFormat(val)) {
         setDisbleButton(false)
     } else {
@@ -48,7 +60,8 @@ const StartPomo: NextPage = () => {
   
   const onShortBrealValChange = (event: any) => {
     let val = event.target.value
-    initialPomo.shortbreakTime = val
+    setShortbreakTimeString(val)
+    initialPomo.shortbreakTime = stringToSeconds(shortbreakTimeString)
   
     if (isValidTimeFormat(val)) {
         setDisbleButton(false)
@@ -59,7 +72,8 @@ const StartPomo: NextPage = () => {
   
   const onLongBrealValChange = (event: any) => {
     let val = event.target.value
-    initialPomo.longbreakTime = val
+    setLongbreakTimeString(val)
+    initialPomo.longbreakTime = stringToSeconds(longbreakTimeString)
   
     if (isValidTimeFormat(val)) {
         setDisbleButton(false)
@@ -72,7 +86,7 @@ const StartPomo: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
-        <title>{formatTime(timeLeft)} - pomo</title>
+        <title>{formatTime(timeLeft)} ({cycle}) - pomo</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -91,7 +105,7 @@ const StartPomo: NextPage = () => {
         <div className="flex justify-center gap-2 items-center">
             <div className="flex flex-col justify-start items-start mt-[24px]">
                 <span className={`${!sessionClosed && cycle === 'focus' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Focus</span>
-                <input onChange={onTimerValChange} disabled={!sessionClosed} type="text" placeholder="25:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={formatTime(initialPomo.focusTime)}/>
+                <input onChange={onTimerValChange} disabled={!sessionClosed} type="text" placeholder="25:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={focusTimeString}/>
             </div>
             <div className={"flex flex-col justify-start items-start " + `${numShortBreak > 0 ? "m-0" : "mt-[24px]"}`}>
                 { numShortBreak > 0 ? 
@@ -105,11 +119,11 @@ const StartPomo: NextPage = () => {
                 }
                 
                 <span className={`${!sessionClosed && cycle === 'shortbreak' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Short Break</span>
-                <input onChange={onShortBrealValChange} disabled={!sessionClosed} type="text" placeholder="5:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={formatTime(initialPomo.shortbreakTime)}/>
+                <input onChange={onShortBrealValChange} disabled={!sessionClosed} type="text" placeholder="5:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={shortbreakTimeString}/>
             </div>
             <div className="flex flex-col justify-start items-start mt-[24px]">
                 <span className={`${!sessionClosed && cycle === 'longbreak' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Long Break</span>
-                <input onChange={onLongBrealValChange} disabled={!sessionClosed} type="text" placeholder="15:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={formatTime(initialPomo.longbreakTime)}/>
+                <input onChange={onLongBrealValChange} disabled={!sessionClosed} type="text" placeholder="15:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={longbreakTimeString}/>
              </div>
         </div>
         { isCounting ?
