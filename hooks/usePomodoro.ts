@@ -35,12 +35,18 @@ const usePomodoro = ({
     const [timeLeft, setTimeLeft] = useState(_focusTime)
     const [sessionClosed, setSessionClosed] = useState(true)
     const [cycle, setCycle] = useState('focus')
-    const [numCycle, setNumCycle] = useState(0)
+    const [numSet, setNumSet] = useState(0)
+    const [totalFocusTime, setTotalFocusTime] = useState(0)
+    const [totalBreakTime, setTotalBreakTime] = useState(0)
     const [numFocus, setNumFocus] = useState(0)
 
     const numFocusPerSession = 4
     const [playStartSound] = useSound('/sounds/startTimer.mp3', {volume: 10})
     const [playPauseSound] = useSound('/sounds/pauseTimer.mp3', {volume: 10})
+    
+    const savePomoProgress = () => {
+
+    }
 
     const startCycle = (_cycle: string) => {
         if (_cycle === 'focus') {
@@ -78,6 +84,13 @@ const usePomodoro = ({
         setTimeLeft(focusTime)
         setCycle('focus')
         setNumFocus(0)
+
+
+        // 1 pomodoro = focus + break
+        // 4 pomodoro = 1 set
+        // Goal: 1 day 3 - 4 sets
+        savePomoProgress()
+
     }
 
     
@@ -89,6 +102,7 @@ const usePomodoro = ({
             }, 1000);
 
             return () => clearInterval(interval);
+
         } else if (timeLeft === 0 && !sessionClosed) {
             if (cycle === 'focus') {
                 if (numFocus == numFocusPerSession) {
