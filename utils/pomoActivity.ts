@@ -19,7 +19,7 @@ export default class PomoActivity {
     ): number {
 
         if (cycle == 'focus' && timeLeft > 0) {
-            numFocus -= 1
+            numFocus = Math.max(0,numFocus - 1)
         }
 
         let totalPomo = (numCycle * numFocusPerSession) + numFocus

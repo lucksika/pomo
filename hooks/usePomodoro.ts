@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useSound from "use-sound";
+import PomoActivity from "@/utils/pomoActivity";
 
 interface Props {
     _focusTime: number,
@@ -25,6 +26,8 @@ const usePomodoro = ({
         number,
         number,
         number, 
+        number, 
+        number,
         string
     ] => {
     
@@ -35,17 +38,24 @@ const usePomodoro = ({
     const [timeLeft, setTimeLeft] = useState(_focusTime)
     const [sessionClosed, setSessionClosed] = useState(true)
     const [cycle, setCycle] = useState('focus')
-    const [numSet, setNumSet] = useState(0)
+    const [totalPomo, setTotalPomo] = useState(0)
     const [totalFocusTime, setTotalFocusTime] = useState(0)
     const [totalBreakTime, setTotalBreakTime] = useState(0)
     const [numFocus, setNumFocus] = useState(0)
+    const [numCycle, setNumCycle] = useState(0)
 
     const numFocusPerSession = 4
     const [playStartSound] = useSound('/sounds/startTimer.mp3', {volume: 10})
     const [playPauseSound] = useSound('/sounds/pauseTimer.mp3', {volume: 10})
     
-    const savePomoProgress = () => {
+    let pomoAct = new PomoActivity()
 
+    const savePomoProgress = () => {
+        // Total pomo
+
+        // Total focus time
+
+        // Total break time
     }
 
     const startCycle = (_cycle: string) => {
@@ -90,7 +100,6 @@ const usePomodoro = ({
         // 4 pomodoro = 1 set
         // Goal: 1 day 3 - 4 sets
         savePomoProgress()
-
     }
 
     
@@ -114,6 +123,7 @@ const usePomodoro = ({
                 startCycle('focus')
             } else if (cycle === 'longbreak') {
                 setNumFocus(0)
+                setNumCycle(numCycle => numCycle + 1)
                 startCycle('focus')
             }
         }
@@ -134,6 +144,8 @@ const usePomodoro = ({
         shortbreakTime,
         longbreakTime,
         numFocus,
+        numCycle,
+        numFocusPerSession,
         cycle
     ]
 }

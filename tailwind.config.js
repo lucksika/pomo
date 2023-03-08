@@ -17,6 +17,7 @@ module.exports = {
     //   ],
     // },
     colors: {
+      'white': "#ffffff",
       'pomored': '#A00607',
       'pomodarkred': "#6A0405",
       'pomotext': '#3C2E0E',

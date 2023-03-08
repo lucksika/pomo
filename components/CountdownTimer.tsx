@@ -1,9 +1,9 @@
-import React, { useEffect, memo, Dispatch, SetStateAction, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useState } from "react";
 import { FaPause, FaPlay } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
 import { GiTomato } from 'react-icons/gi'
-import { PomoContext, PomoProvider } from "context/PomoContext";
+import { PomoContext } from "context/PomoContext";
 
 interface Props {
 
@@ -19,7 +19,7 @@ const formatTime = (timeLeft: number) => {
 const ShowCounter = ({formattedTime}: any) => {
     return (
         <div>
-            <h1 className="font-semibold text-[200px] text-pomotext" data-testid="timer">{formattedTime}</h1>
+            <h1 className="font-semibold min-[300px]:text-[100px] lg:text-[200px] text-pomotext">{formattedTime}</h1>
         </div>
     )
 }
@@ -105,15 +105,15 @@ const TimerController = ({}: any) => {
               ''
               }
               <span className={`${!sessionClosed && cycle === 'focus' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Focus</span>
-              <input onChange={onTimerValChange} disabled={!sessionClosed} type="text" placeholder="25:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={focusTimeString}/>
+              <input onChange={onTimerValChange} disabled={!sessionClosed} type="text" placeholder="25:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={focusTimeString}/>
           </div>
           <div className={"flex flex-col justify-start items-start mt-[24px]"}>
               <span className={`${!sessionClosed && cycle === 'shortbreak' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Short Break</span>
-              <input onChange={onShortBrealValChange} disabled={!sessionClosed} type="text" placeholder="5:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={shortbreakTimeString}/>
+              <input onChange={onShortBrealValChange} disabled={!sessionClosed} type="text" placeholder="5:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={shortbreakTimeString}/>
           </div>
           <div className="flex flex-col justify-start items-start mt-[24px]">
               <span className={`${!sessionClosed && cycle === 'longbreak' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Long Break</span>
-              <input onChange={onLongBrealValChange} disabled={!sessionClosed} type="text" placeholder="15:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg w-[125px] text-4xl font-semibold"} value={longbreakTimeString}/>
+              <input onChange={onLongBrealValChange} disabled={!sessionClosed} type="text" placeholder="15:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={longbreakTimeString}/>
           </div>
         </div>
           { isCounting ?
@@ -147,7 +147,7 @@ const CountdownTimer =({}: Props) => {
         <>
         { sessionClosed ? 
             <div className='flex h-10 w-full'></div> :
-            <div className='flex h-10 w-full justify-end'>
+            <div className='flex h-10 w-full lg:justify-end min-[300px]:justify-center'>
                 <button onClick={() => resetCounter()} className='flex items-center gap-2 text-pomored '>
                     <MdClose className='w-5 h-5'/>End session
                 </button>

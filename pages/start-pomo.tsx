@@ -3,9 +3,9 @@ import Header from "@/components/Header";
 import type { NextPage } from "next";
 import Head from "next/head";
 import CountdownTimer from "@/components/CountdownTimer";
-// import { usePomodoro } from "hooks/usePomodoro";
 import { useContext } from "react";
 import { PomoContext, PomoProvider } from "context/PomoContext";
+// import ActivityCard from "@/components/ActivityCard";
 
 
 function PomoContent() {
@@ -21,9 +21,11 @@ function PomoContent() {
 
       <Header></Header>
 
-      <main className="flex w-[800px] flex-1 flex-col items-center justify-center px-20 text-center">
-        
-        <CountdownTimer />
+      <main className="h-screen w-full lg:py-10 lg:px-20 my-5">
+        {/* <ActivityCard/> */}
+        <div className="flex lg:w-[800px] sm:w-inherit flex-1 flex-col items-center justify-center text-center lg:m-auto sm:m-0 my-7">
+          <CountdownTimer/>
+        </div>
       </main>
 
       <Footer></Footer>

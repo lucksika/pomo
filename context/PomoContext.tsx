@@ -15,6 +15,8 @@ interface IThemeContext {
     shortbreakTime: number,
     longbreakTime: number,
     numFocus: number,
+    numCycle: number,
+    numFocusPerSession: number,
     cycle: string
 };
   
@@ -32,6 +34,8 @@ const defaultState = {
     shortbreakTime: 0,
     longbreakTime: 0, 
     numFocus: 0,
+    numCycle: 0,
+    numFocusPerSession: 0,
     cycle: ''
 }
   
@@ -58,6 +62,8 @@ function PomoProvider({ children }: any) {
         shortbreakTime,
         longbreakTime, 
         numFocus,
+        numCycle,
+        numFocusPerSession,
         cycle ] = usePomodoro(initialPomo)
 
 
@@ -77,6 +83,8 @@ function PomoProvider({ children }: any) {
             shortbreakTime,
             longbreakTime, 
             numFocus,
+            numCycle,
+            numFocusPerSession,
             cycle
         }}
         >
