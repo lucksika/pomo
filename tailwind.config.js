@@ -9,23 +9,22 @@ module.exports = {
     extend: {
       fontFamily: {
         inter: ['Inter'],
+      },
+      colors: {
+        bluegray: {
+          900: "#0F172A",
+          800: "#1E293B",
+          700: "#334155",
+          600: "#475569",
+          500: "#64748B",
+          400: "#94A3B8",
+          300: "#CBD5E1",
+          200: "#E2E8F0",
+          100: "#F1F5F9",
+          50: "#F8FAFC"
+        }
       }
-    },
-    // fontFamily: {
-    //   sans: [
-    //     "Open Sans, sans-serif",
-    //   ],
-    // },
-    colors: {
-      'white': "#ffffff",
-      'pomored': '#A00607',
-      'pomodarkred': "#6A0405",
-      'pomotext': '#3C2E0E',
-      'pomocaption': "#BEA171",
-      'pomobg': "#E9D5C0",
-      "pomodisable": "#AEA6A6"
-    },
-    extend: {},
+    }
   },
   plugins: [],
 }

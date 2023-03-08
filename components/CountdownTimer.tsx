@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
 import { useState } from "react";
-import { FaPause, FaPlay } from 'react-icons/fa'
-import { MdClose } from 'react-icons/md'
-import { GiTomato } from 'react-icons/gi'
+import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import redPomo from '../public/pomo_logo.png'
+import grayPomo from '../public/pomo_logo_gray.png'
+import Image from 'next/image';
 import { PomoContext } from "context/PomoContext";
 
 interface Props {
@@ -19,7 +20,7 @@ const formatTime = (timeLeft: number) => {
 const ShowCounter = ({formattedTime}: any) => {
     return (
         <div>
-            <h1 className="font-semibold min-[300px]:text-[100px] lg:text-[200px] text-pomotext">{formattedTime}</h1>
+            <h1 className="font-medium min-[300px]:text-[100px] lg:text-[200px] text-bluegray-700">{formattedTime}</h1>
         </div>
     )
 }
@@ -94,34 +95,34 @@ const TimerController = ({}: any) => {
     return (
       <>
         <div className="flex justify-center gap-2 items-center">
-          <div className={"flex flex-col justify-start items-start " + `${numFocus > 0 && !sessionClosed ? "m-0" : "mt-[24px]"}`}>
+          <div className={"flex flex-col justify-start items-start " + `${numFocus > 0 && !sessionClosed ? "m-0" : "mt-8"}`}>
             { numFocus > 0 && !sessionClosed ? 
-              <div className='flex justify-start ml-[-8px] text-pomocaption'>
-                  <GiTomato className={'text-2xl w-fit ' + `${numFocus >= 1 ? 'text-pomored' : 'text-pomocaption'}`}/>
-                  <GiTomato className={'text-2xl w-fit ' + `${numFocus >= 2 ? 'text-pomored' : 'text-pomocaption'}`}/>
-                  <GiTomato className={'text-2xl w-fit ' + `${numFocus >= 3 ? 'text-pomored' : 'text-pomocaption'}`}/>
-                  <GiTomato className={'text-2xl w-fit ' + `${numFocus >= 4 ? 'text-pomored' : 'text-pomocaption'}`}/>
+              <div className='flex justify-start gap-2 ml-[-8px] text-bluegray-700 pb-3'>
+                <Image alt="" src={numFocus >= 1 ? redPomo : grayPomo} width={20} height={20}></Image>
+                <Image alt="" src={numFocus >= 2 ? redPomo : grayPomo} width={20} height={20}></Image>
+                <Image alt="" src={numFocus >= 3 ? redPomo : grayPomo} width={20} height={20}></Image>
+                <Image alt="" src={numFocus >= 4 ? redPomo : grayPomo} width={20} height={20}></Image>
               </div> :
               ''
               }
-              <span className={`${!sessionClosed && cycle === 'focus' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Focus</span>
-              <input onChange={onTimerValChange} disabled={!sessionClosed} type="text" placeholder="25:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={focusTimeString}/>
+              <span className={`${!sessionClosed && cycle === 'focus' ? 'text-red-500': 'text-bluegray-700'}` + " text-xs font-semibold"}>Focus</span>
+              <input onChange={onTimerValChange} disabled={!sessionClosed} type="text" placeholder="25:00" maxLength={5} className={`${!sessionClosed ? 'text-gray-400' : 'text-red-500'}` + " bg-white min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={focusTimeString}/>
           </div>
-          <div className={"flex flex-col justify-start items-start mt-[24px]"}>
-              <span className={`${!sessionClosed && cycle === 'shortbreak' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Short Break</span>
-              <input onChange={onShortBrealValChange} disabled={!sessionClosed} type="text" placeholder="5:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={shortbreakTimeString}/>
+          <div className={"flex flex-col justify-start items-start mt-8"}>
+              <span className={`${!sessionClosed && cycle === 'shortbreak' ? 'text-red-500': 'text-bluegray-700'}` + " text-xs font-semibold"}>Short Break</span>
+              <input onChange={onShortBrealValChange} disabled={!sessionClosed} type="text" placeholder="5:00" maxLength={5} className={`${!sessionClosed ? 'text-gray-400' : 'text-red-500'}` + " bg-white min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={shortbreakTimeString}/>
           </div>
-          <div className="flex flex-col justify-start items-start mt-[24px]">
-              <span className={`${!sessionClosed && cycle === 'longbreak' ? 'text-pomored': 'text-pomocaption'}` + " text-xs font-semibold"}>Long Break</span>
-              <input onChange={onLongBrealValChange} disabled={!sessionClosed} type="text" placeholder="15:00" maxLength={5} className={`${!sessionClosed ? 'text-pomodisable' : 'text-pomored'}` + " bg-pomobg min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={longbreakTimeString}/>
+          <div className="flex flex-col justify-start items-start mt-8">
+              <span className={`${!sessionClosed && cycle === 'longbreak' ? 'text-red-500': 'text-bluegray-700'}` + " text-xs font-semibold"}>Long Break</span>
+              <input onChange={onLongBrealValChange} disabled={!sessionClosed} type="text" placeholder="15:00" maxLength={5} className={`${!sessionClosed ? 'text-gray-400' : 'text-red-500'}` + " bg-white min-[300px]:w-[100px] lg:w-[125px] min-[300px]:text-3xl lg:text-4xl font-semibold"} value={longbreakTimeString}/>
           </div>
         </div>
           { isCounting ?
-              <button onClick={() => pauseCounter()} className="flex justify-center items-center bg-pomored hover:bg-pomodarkred rounded-full w-12 h-12 disabled:bg-pomodisable mt-[24px]">
-                  <FaPause className="text-[#FFFFFF] w-5 h-5"></FaPause>
+              <button onClick={() => pauseCounter()} className="flex justify-center items-center bg-red-500 hover:bg-pomodarkred rounded-full w-12 h-12 disabled:bg-gray-400 mt-8">
+                  <PauseIcon className="text-[#FFFFFF] w-5 h-5"></PauseIcon>
               </button> :
-              <button onClick={() => startCounter()} disabled={disableButton} className="flex justify-center items-center bg-pomored hover:bg-pomodarkred rounded-full w-12 h-12 disabled:bg-pomodisable mt-[24px]">
-                  <FaPlay className="text-[#FFFFFF] w-5 h-5"></FaPlay>
+              <button onClick={() => startCounter()} disabled={disableButton} className="flex justify-center items-center bg-red-500 hover:bg-pomodarkred rounded-full w-12 h-12 disabled:bg-gray-400 mt-8">
+                  <PlayIcon className="text-[#FFFFFF] w-5 h-5"></PlayIcon>
               </button>
            }    
       </>
@@ -145,18 +146,18 @@ const CountdownTimer =({}: Props) => {
 
     return (
         <>
-        { sessionClosed ? 
-            <div className='flex h-10 w-full'></div> :
-            <div className='flex h-10 w-full lg:justify-end min-[300px]:justify-center'>
-                <button onClick={() => resetCounter()} className='flex items-center gap-2 text-pomored '>
-                    <MdClose className='w-5 h-5'/>End session
-                </button>
-            </div>
-        }
         <ShowCounter
         formattedTime={formatTime(timeLeft)}
         />
         <TimerController/>
+        { sessionClosed ? 
+            <div className='flex h-10 w-full'></div> :
+            <div className='flex h-10 w-full justify-center'>
+                <button onClick={() => resetCounter()} className='flex items-center gap-2 text-red-500 '>
+                    <XMarkIcon className='w-5 h-5'/>End session
+                </button>
+            </div>
+        }
         </>
     )
     
