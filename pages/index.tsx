@@ -21,7 +21,7 @@ function PomoContent() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="relative flex lg:w-[800px] sm:w-inherit flex-1 flex-col items-center justify-center text-center lg:m-auto sm:m-0 my-7">
+      <div className="relative flex lg:w-[800px] sm:w-inherit flex-1 flex-col items-center justify-center text-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
           className={`${isInfoMessageVisible ? "hidden": "visible"}` + " mt-[-20px] absolute top-0 w-6 h-6 text-bluegray-700 cursor-pointer hover:text-red-500"}
           onClick={() => setIsInfoMessageVisible(true)}>
@@ -39,7 +39,7 @@ function PomoContent() {
           </div>
         </div>
         
-        <Image src={numFocus > 0 && !sessionClosed ? mascotAct3: mascotAct2} alt="" height={200}></Image>
+        <Image src={numFocus > 0 && !sessionClosed ? mascotAct3: mascotAct2} alt="" height={180}></Image>
         <CountdownTimer/>
       </div>
     </>

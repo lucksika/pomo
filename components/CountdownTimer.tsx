@@ -20,7 +20,7 @@ const formatTime = (timeLeft: number) => {
 const ShowCounter = ({formattedTime}: any) => {
     return (
         <div>
-            <h1 className="font-medium min-[300px]:text-[100px] lg:text-[200px] text-bluegray-700">{formattedTime}</h1>
+            <h1 className="font-medium text-[100px] md:text-[200px] text-bluegray-700 leading-1 md:leading-none">{formattedTime}</h1>
         </div>
     )
 }
